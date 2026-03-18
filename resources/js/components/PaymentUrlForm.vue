@@ -122,7 +122,9 @@ const commissionPercent = computed(() => {
         return 0
     }
 
-    switch (selectedMethod.value) {
+    const methodId = Number.parseInt(String(selectedMethod.value), 10)
+
+    switch (methodId) {
         case 1: // Если id = 1, то используется cardCommission
             console.log('Using cardCommission:', cardCommission.value)
             return cardCommission.value
@@ -132,6 +134,9 @@ const commissionPercent = computed(() => {
         case 3: // Если id = 3, то используется yandexCommission
             console.log('Using yandexCommission:', yandexCommission.value)
             return yandexCommission.value
+        case 4: // YooKassa: наценка как у оплаты картой (по текущей модели ставок пользователя)
+            console.log('Using cardCommission (YooKassa):', cardCommission.value)
+            return cardCommission.value
         default:
             console.log('Invalid method selected. Returning 0 commission.')
             return 0 // Если метод не выбран, комиссия равна 0
