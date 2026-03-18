@@ -13,7 +13,7 @@
                     @if ($errors->hasAny(['users.' . $user->id . '.name', 'users.' . $user->id . '.password',
                         'users.' . $user->id . '.email', 'users.' . $user->id . '.telegram_id', 'users.' . $user->id . '.role_id',
                         'users.' . $user->id . '.type_id', 'users.' . $user->id . '.payment_point_id', 'users.' . $user->id . '.qr_commission_rate',
-                        'users.' . $user->id . '.card_commission_rate', 'users.' . $user->id . '.yandex_commission_rate',
+                        'users.' . $user->id . '.card_commission_rate', 'users.' . $user->id . '.yookassa_commission_rate', 'users.' . $user->id . '.yandex_commission_rate',
                         'users.' . $user->id . '.agent_commission_rate', 'users.' . $user->id . 'bic',
                         'users.' . $user->id . 'payment_purpose', 'users.' . $user->id . 'counterparty_name',
                         'users.' . $user->id . 'account_number']))

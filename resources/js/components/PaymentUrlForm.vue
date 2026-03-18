@@ -78,6 +78,10 @@ const props = defineProps({
         type: String,
         required: true
     },
+    yookassaCommission: {
+        type: String,
+        required: true
+    },
     qrCommission: {
         type: String,
         required: true
@@ -108,6 +112,12 @@ const yandexCommission = computed(() => {
     return !isNaN(value) ? value : 0
 })
 
+const yookassaCommission = computed(() => {
+    const value = parseFloat(props.yookassaCommission)
+    console.log('YooKassa Commission:', value)
+    return !isNaN(value) ? value : 0
+})
+
 // Логирование для отладки
 watch(selectedMethod, (newValue) => {
     console.log('Selected method changed:', newValue)
@@ -134,9 +144,9 @@ const commissionPercent = computed(() => {
         case 3: // Если id = 3, то используется yandexCommission
             console.log('Using yandexCommission:', yandexCommission.value)
             return yandexCommission.value
-        case 4: // YooKassa: наценка как у оплаты картой (по текущей модели ставок пользователя)
-            console.log('Using cardCommission (YooKassa):', cardCommission.value)
-            return cardCommission.value
+        case 4: // YooKassa: отдельная ставка
+            console.log('Using yookassaCommission:', yookassaCommission.value)
+            return yookassaCommission.value
         default:
             console.log('Invalid method selected. Returning 0 commission.')
             return 0 // Если метод не выбран, комиссия равна 0

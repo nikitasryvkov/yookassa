@@ -10,6 +10,7 @@
                 :methods='@json($user["user_payment_methods"])'
                 :yandex-commission='@json($user["yandex_commission_rate"])'
                 :card-commission='@json($user["card_commission_rate"])'
+                :yookassa-commission='@json($user["yookassa_commission_rate"] ?? $user["card_commission_rate"])'
                 :qr-commission='@json($user["qr_commission_rate"])'>
             </payment-url-form>
 

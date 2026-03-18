@@ -31,6 +31,7 @@ class UserUpdateRequest extends FormRequest
             'users.*.payment_point_id' => 'required|int',
             'users.*.qr_commission_rate' => 'numeric',
             'users.*.card_commission_rate' => 'numeric',
+            'users.*.yookassa_commission_rate' => 'numeric',
             'users.*.yandex_commission_rate' => 'numeric',
             'users.*.agent_commission_rate' => 'numeric',
             'users.*.bic' => 'nullable|string',

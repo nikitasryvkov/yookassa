@@ -15,6 +15,7 @@ use App\Services\User\UserStorageService;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Database\UniqueConstraintViolationException;
 use Illuminate\Support\Str;
 
 class UsersController extends Controller
@@ -51,8 +52,14 @@ class UsersController extends Controller
         UserCreateRequest $request
     ): RedirectResponse
     {
-        User::query()->create($request->validated());
-        return redirect()->route('users.index');
+        try {
+            User::query()->create($request->validated());
+            return redirect()->route('users.index');
+        } catch (UniqueConstraintViolationException) {
+            return back()
+                ->withErrors(['email' => 'Пользователь с таким email уже существует.'])
+                ->withInput();
+        }
     }
 
     /**
@@ -76,6 +83,7 @@ class UsersController extends Controller
         $user->payment_point_id = $validated['users'][$user->id]['payment_point_id'];
         $user->qr_commission_rate = $validated['users'][$user->id]['qr_commission_rate'];
         $user->card_commission_rate = $validated['users'][$user->id]['card_commission_rate'];
+        $user->yookassa_commission_rate = $validated['users'][$user->id]['yookassa_commission_rate'] ?? 0;
         $user->yandex_commission_rate = $validated['users'][$user->id]['yandex_commission_rate'];
         $user->agent_commission_rate = $validated['users'][$user->id]['agent_commission_rate'];
         $user->bic = $validated['users'][$user->id]['bic'];

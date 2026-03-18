@@ -263,6 +263,25 @@
 </div>
 
 <div class="flex flex-col w-full sm:w-1/4">
+    <label for="yookassa-commission-rate-{{ $user->id ?? '' }}" class="text-gray-700 font-medium mb-2">
+        Комиссия YooKassa
+    </label>
+    <input
+        type="text"
+        id="yookassa-commission-rate-{{ $user->id ?? '' }}"
+        @isset($user->id)
+            name="users[{{ $user->id }}][yookassa_commission_rate]"
+        @else
+            name="yookassa_commission_rate"
+        @endif
+        placeholder="Комиссия YooKassa"
+        value="{{ old('yookassa_commission_rate') ?? $user->yookassa_commission_rate ?? 0 }}"
+        class="py-1.5 px-2.5 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2
+                        focus:ring-blue-500 focus:border-blue-500"
+    />
+</div>
+
+<div class="flex flex-col w-full sm:w-1/4">
     <label for="yandex-commission-rate-{{ $user->id ?? '' }}" class="text-gray-700 font-medium mb-2">
         Комиссия Yandex
     </label>

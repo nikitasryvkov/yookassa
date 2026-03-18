@@ -30,6 +30,7 @@ class User extends Authenticatable
         'payment_point_id',
         'qr_commission_rate',
         'card_commission_rate',
+        'yookassa_commission_rate',
         'yandex_commission_rate',
         'agent_commission_rate',
         'bic',
