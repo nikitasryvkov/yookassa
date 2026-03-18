@@ -1,0 +1,32 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('agent_commissions', function (Blueprint $table) {
+            $table->dropIndex(['agent_commission_rate']);
+            $table->unsignedTinyInteger('status')->nullable()->change();
+            $table->index(['status']);
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::table('agent_commissions', function (Blueprint $table) {
+            $table->string('status')->nullable()->change();
+            $table->dropIndex(['status']);
+            $table->index(['agent_commission_rate']);
+        });
+    }
+};

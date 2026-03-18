@@ -1,0 +1,68 @@
+networks:
+    denis-network:
+        driver: bridge
+        name: denis-network
+
+services:
+    app:
+        build:
+            context: .
+            dockerfile: Dockerfile
+        image: medvedev/lara11-php83
+        container_name: denis-adminka-php
+        restart: unless-stopped
+        environment:
+            DB_HOST: db
+            DB_PASSWORD: secret
+        volumes:
+            - ./:/var/www
+            - ./config/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+        networks:
+            - denis-network
+
+    nginx:
+        build:
+            context: .
+            dockerfile: Dockerfile_Nginx
+        image: medvedev/nginx-lara
+        container_name: denis-adminka-nginx
+        restart: unless-stopped
+        ports:
+            - 8081:80
+        volumes:
+            - ./:/var/www
+            - ./config/nginx/conf.d/:/etc/nginx/conf.d/
+        depends_on:
+            - app
+        networks:
+            - denis-network
+
+    npm-crm:
+        image: node:22-alpine3.20
+        container_name: npm-denis
+        volumes:
+            - ./:/var/www
+        working_dir: /var/www/
+        profiles: [ "npm" ]
+        entrypoint: ['npm']
+        ports:
+            - 5174:5174
+        networks:
+            - denis-network
+
+    db:
+        image: mariadb:latest
+        container_name: denis-adminka-db
+        environment:
+            MYSQL_DATABASE: adminka
+            MYSQL_ROOT_PASSWORD: secret
+        ports:
+            - '42333:3306'
+        volumes:
+            - dbdata:/var/lib/mysql
+        networks:
+            - denis-network
+
+volumes:
+    dbdata:
+        driver: local

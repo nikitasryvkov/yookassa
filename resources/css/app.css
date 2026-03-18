@@ -1,0 +1,22 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.tochka-bank-payment-name-1 {
+    @apply bg-lime-200;
+    @apply px-1;
+    @apply rounded-md;
+}
+
+.tochka-bank-payment-name-2 {
+    @apply bg-emerald-200;
+    @apply px-1;
+    @apply rounded-md;
+}
+
+.tochka-bank-payment-name-3 {
+    @apply bg-cyan-200;
+    @apply px-1;
+    @apply rounded-md;
+}
+
