@@ -119,6 +119,15 @@ class PaymentUrlCreateService
     {
         $idempotenceKey = $this->yooKassaClient->generateIdempotenceKey();
 
+        $taxSystemCode = config('yookassa.tax_system_code');
+        $vatCode = config('yookassa.default_vat_code');
+
+        $customerEmail = $data['customer_email'] ?? null;
+        if (empty($customerEmail) && !empty($data['user']['email'])) {
+            // fallback: если email покупателя не передан, используем email пользователя-инициатора
+            $customerEmail = $data['user']['email'];
+        }
+
         $payload = [
             'amount' => [
                 // ЮKassa ожидает строку с 2 знаками после запятой
@@ -132,6 +141,28 @@ class PaymentUrlCreateService
             'capture' => true,
             'description' => $data['user']['payment_point']['payment_purpose'] ?? 'Оплата',
         ];
+
+        // Если у магазина включены чеки, ЮKassa может требовать receipt на создание платежа.
+        // Параметры налогов/НДС задаются через env.
+        if (!empty($taxSystemCode) && !empty($vatCode) && !empty($customerEmail)) {
+            $payload['receipt'] = [
+                'customer' => [
+                    'email' => $customerEmail,
+                ],
+                'tax_system_code' => (int) $taxSystemCode,
+                'items' => [
+                    [
+                        'description' => $payload['description'],
+                        'quantity' => '1.00',
+                        'amount' => [
+                            'value' => $payload['amount']['value'],
+                            'currency' => $payload['amount']['currency'],
+                        ],
+                        'vat_code' => (int) $vatCode,
+                    ],
+                ],
+            ];
+        }
 
         try {
             $response = $this->yooKassaClient->createPayment($payload, $idempotenceKey);

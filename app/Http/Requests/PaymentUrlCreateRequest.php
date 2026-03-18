@@ -26,6 +26,7 @@ class PaymentUrlCreateRequest extends FormRequest
             'sum' => ['required', 'numeric', 'min:0.01'],
             'total' => ['required', 'numeric', 'min:0.01'],
             'commission' => ['required', 'numeric', 'min:0'],
+            'customer_email' => ['nullable', 'email', 'max:255'],
             'user_id' => ['required', 'integer'],
             'user_type_id' => ['required', 'integer'],
             'payment_point_id' => ['required', 'integer'],
