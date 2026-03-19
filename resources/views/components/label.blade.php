@@ -1,6 +1,6 @@
-<label class="mb-2 block text-sm font-medium text-slate-900"
-       for="{{ $for }}">
-    {{ $slot }} @if ($required)
-        <span>*</span>
+<label class="form-label" for="{{ $for }}">
+    {{ $slot }}
+    @if ($required)
+        <span class="text-red-400">*</span>
     @endif
 </label>

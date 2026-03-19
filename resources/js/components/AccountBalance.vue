@@ -1,9 +1,12 @@
 <template>
 
-    <p>
-        Баланс счёта: <strong><span v-if="loading">Загрузка... 🔄</span>{{ balance }}</strong>
+    <div>
+        <div class="stat-value" v-if="loading">
+            <span class="inline-block h-6 w-24 animate-pulse rounded bg-slate-700"></span>
+        </div>
+        <div class="stat-value" v-else>{{ balance }}</div>
         <slot name="commission" />
-    </p>
+    </div>
 </template>
 
 <script setup>

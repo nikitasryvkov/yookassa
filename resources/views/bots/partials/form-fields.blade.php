@@ -1,26 +1,19 @@
-<div class="flex flex-col w-full">
-    <label class="text-gray-700 font-medium mb-2">
-        Название бота
-    </label>
-    <input type="text" name="name"
-        placeholder="Название бота"
-        class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2
-            focus:ring-blue-500 focus:border-blue-500"
-        value="{{ old('name') ?? $bot->name ?? '' }}"
-    />
+<div class="space-y-3 w-full">
+    <div>
+        <label for="name-{{ $bot->id ?? '' }}" class="form-label">Название бота</label>
+        <input type="text" name="name" id="name-{{ $bot->id ?? '' }}" placeholder="Название бота"
+            class="form-input" value="{{ old('name') ?? $bot->name ?? '' }}" />
+    </div>
 
-    <label class="text-gray-700 font-medium mb-2">
-        Токен
-    </label>
-    <input type="text" name="token"
-           placeholder="Токен"
-           class="px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2
-            focus:ring-blue-500 focus:border-blue-500"
-           value="{{ old('token') ?? $bot->token ?? '' }}"
-    />
+    <div>
+        <label for="token-{{ $bot->id ?? '' }}" class="form-label">Токен</label>
+        <input type="text" name="token" id="token-{{ $bot->id ?? '' }}" placeholder="Токен"
+            class="form-input" value="{{ old('token') ?? $bot->token ?? '' }}" />
+    </div>
 
-    <label class="text-gray-700 font-medium mb-2 mt-1">
-        Текст команды старт
-    </label>
-    <textarea class="p-2" name="start_text" cols="30" rows="4">{{ old('start_text') ?? $bot->start_text ?? '' }}</textarea>
+    <div>
+        <label for="start-text-{{ $bot->id ?? '' }}" class="form-label">Текст команды старт</label>
+        <textarea name="start_text" id="start-text-{{ $bot->id ?? '' }}" rows="4"
+            class="form-input">{{ old('start_text') ?? $bot->start_text ?? '' }}</textarea>
+    </div>
 </div>

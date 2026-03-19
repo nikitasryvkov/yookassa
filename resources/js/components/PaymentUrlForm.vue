@@ -1,14 +1,12 @@
 <template>
     <div>
-        <label for="payment_method_id" class="block text-sm font-medium text-gray-700 mb-1">
-            Способ оплаты
-        </label>
+        <label for="payment_method_id" class="form-label">Способ оплаты</label>
         <select
             id="payment_method_id"
             name="payment_method_id"
             v-model="selectedMethod"
             required
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="form-input"
         >
             <option value="">Выберите способ оплаты</option>
             <option
@@ -22,9 +20,7 @@
     </div>
 
     <div>
-        <label for="amount" class="block text-sm font-medium text-gray-700 mb-1">
-            Сумма
-        </label>
+        <label for="amount" class="form-label">Сумма</label>
         <input
             type="number"
             name="sum"
@@ -32,29 +28,27 @@
             id="amount"
             v-model.number="amount"
             placeholder="Введите сумму"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="form-input"
             min="1"
             step="any"
         >
     </div>
 
     <div>
-        <label for="customer_email" class="block text-sm font-medium text-gray-700 mb-1">
-            Email покупателя (для чека)
-        </label>
+        <label for="customer_email" class="form-label">Email покупателя (для чека)</label>
         <input
             type="email"
             name="customer_email"
             id="customer_email"
             v-model.trim="customerEmail"
             placeholder="buyer@example.com"
-            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500"
+            class="form-input"
         >
     </div>
 
-    <div class="flex items-center px-4 py-2 bg-gray-100 border border-gray-300 rounded-lg text-sm text-gray-700">
-        <span>Комиссия: <strong id="commission">{{ commission }} ₽</strong></span>
-        <span class="pl-4">К оплате: <strong id="total">{{ total }} ₽</strong></span>
+    <div class="flex items-center gap-6 rounded-xl border border-slate-700/60 bg-slate-800/40 px-4 py-3 text-sm text-slate-300">
+        <span>Комиссия: <strong id="commission" class="text-amber-400">{{ commission }} ₽</strong></span>
+        <span>К оплате: <strong id="total" class="text-emerald-400 text-base">{{ total }} ₽</strong></span>
     </div>
 
     <input id="total-input" type="hidden" name="total" :value="total" />

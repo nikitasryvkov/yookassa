@@ -1,14 +1,14 @@
 <template>
-    <div class="max-w-4xl mx-auto p-6 bg-white shadow-md rounded-lg">
-        <!-- Кнопка показа формы -->
-        <button @click="toggleForm"
-                class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            {{ showForm ? 'Скрыть форму поиска' : 'Показать форму поиска' }}
+    <div>
+        <button @click="toggleForm" class="btn-ghost w-full text-sm">
+            <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
+            </svg>
+            {{ showForm ? 'Скрыть фильтры' : 'Показать фильтры' }}
         </button>
 
-        <!-- Форма поиска -->
         <div v-if="showForm" class="mt-4">
-            <form @submit.prevent="submitForm" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <form @submit.prevent="submitForm" class="grid grid-cols-1 md:grid-cols-2 gap-3">
                 <!-- Селект для User ID -->
                 <select v-if="isAdmin" v-model="searchFields.user_id" class="input-field">
                     <option value="">Выберите User ID</option>
@@ -42,9 +42,9 @@
                 <input type="text" v-model="searchFields.payer_tag" placeholder="Payer Tag" class="input-field">
                 <input type="date" v-model="searchFields.created_at" placeholder="Payer Tag" class="input-field">
 
-                <div class="col-span-1 md:col-span-2 flex justify-between">
-                    <button type="submit" class="btn-primary">Найти</button>
-                    <button type="button" @click="clearFilters" class="btn-secondary">Сбросить</button>
+                <div class="col-span-1 md:col-span-2 flex gap-3">
+                    <button type="submit" class="search-btn-primary">Найти</button>
+                    <button type="button" @click="clearFilters" class="search-btn-secondary">Сбросить</button>
                 </div>
             </form>
         </div>
@@ -120,14 +120,15 @@ const clearFilters = () => {
 
 <style scoped>
 .input-field {
-    @apply w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500;
+    @apply w-full rounded-xl border border-slate-600/80 bg-slate-900/60 px-3.5 py-2.5 text-sm text-slate-100
+           placeholder:text-slate-500 transition-all duration-200 focus:border-blue-500/60 focus:outline-none focus:ring-2 focus:ring-blue-500/25;
 }
-
-.btn-primary {
-    @apply px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700;
+.search-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           bg-blue-600 text-white shadow-md shadow-blue-500/20 hover:bg-blue-500 transition-all duration-200;
 }
-
-.btn-secondary {
-    @apply px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700;
+.search-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold
+           border border-slate-600 bg-slate-800 text-slate-200 hover:border-slate-500 hover:bg-slate-700 transition-all duration-200;
 }
 </style>
