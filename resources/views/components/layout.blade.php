@@ -24,7 +24,7 @@
             </div>
         </div>
         <nav class="flex-1 px-4 py-4 space-y-1 text-sm">
-            <a href="{{ route('/') }}"
+            <a href="{{ url('/') }}"
                class="flex items-center gap-2 rounded-lg px-3 py-2 hover:bg-slate-800/80 hover:text-slate-50 transition-colors">
                 <span class="h-1.5 w-1.5 rounded-full bg-emerald-400"></span>
                 <span>Дэшборд</span>
